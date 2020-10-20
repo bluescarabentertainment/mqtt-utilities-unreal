@@ -50,6 +50,7 @@ public:
 	std::string Password;
 	
 	int32 Port;
+	bool bIsSecureConnection = false;
 
 	void OnConnect();
 	void OnDisconnect();
