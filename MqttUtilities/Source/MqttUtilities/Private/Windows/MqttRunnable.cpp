@@ -201,7 +201,10 @@ void FMqttRunnable::PushTask(FMqttTaskPtr task)
 void FMqttRunnable::OnConnect()
 {
 	AsyncTask(ENamedThreads::GameThread, [this]() {
-		client->OnConnectDelegate.ExecuteIfBound();
+		if (IsAlive() && IsValid(client))
+		{
+			client->OnConnectDelegate.ExecuteIfBound();
+		}
 	});
 }
 
@@ -210,7 +213,10 @@ void FMqttRunnable::OnDisconnect()
 	if (IsAlive())
 	{
 		AsyncTask(ENamedThreads::GameThread, [this]() {
-			client->OnDisconnectDelegate.ExecuteIfBound();
+			if (IsAlive() && IsValid(client))
+			{
+				client->OnDisconnectDelegate.ExecuteIfBound();
+			}
 		});
 	}
 }
@@ -218,7 +224,10 @@ void FMqttRunnable::OnDisconnect()
 void FMqttRunnable::OnPublished(int mid)
 {
 	AsyncTask(ENamedThreads::GameThread, [this, mid]() {
-		client->OnPublishDelegate.ExecuteIfBound(mid);
+		if (IsAlive() && IsValid(client))
+		{
+			client->OnPublishDelegate.ExecuteIfBound(mid);
+		}
 	});
 }
 
@@ -227,7 +236,10 @@ void FMqttRunnable::OnMessage(FMqttMessage message)
 	if (IsAlive())
 	{
 		AsyncTask(ENamedThreads::GameThread, [this, message]() {
-			client->OnMessageDelegate.ExecuteIfBound(message);
+			if (IsAlive() && IsValid(client))
+			{
+				client->OnMessageDelegate.ExecuteIfBound(message);
+			}
 		});
 	}
 }
@@ -235,7 +247,10 @@ void FMqttRunnable::OnMessage(FMqttMessage message)
 void FMqttRunnable::OnSubscribe(int mid, const TArray<int> qos)
 {
 	AsyncTask(ENamedThreads::GameThread, [this, mid, qos]() {
-		client->OnSubscribeDelegate.ExecuteIfBound(mid, qos);
+		if (IsAlive() && IsValid(client))
+		{
+			client->OnSubscribeDelegate.ExecuteIfBound(mid, qos);
+		}
 	});
 }
 
@@ -244,8 +259,11 @@ void FMqttRunnable::OnUnsubscribe(int mid)
 {
 	if (IsAlive())
 	{
-		AsyncTask(ENamedThreads::GameThread, [this, mid]() {
-			client->OnUnsubscribeDelegate.ExecuteIfBound(mid);
+		AsyncTask(ENamedThreads::GameThread, [this, mid](){
+			if (IsAlive() && IsValid(client))
+			{
+				client->OnUnsubscribeDelegate.ExecuteIfBound(mid);
+			}
 		});
 	}
 }
@@ -256,7 +274,10 @@ void FMqttRunnable::OnError(int errCode, FString message)
 	if (IsAlive())
 	{
 		AsyncTask(ENamedThreads::GameThread, [this, errCode, message]() {
-			client->OnErrorDelegate.ExecuteIfBound(errCode, message);
+			if (IsAlive() && IsValid(client))
+			{
+				client->OnErrorDelegate.ExecuteIfBound(errCode, message);
+			}
 		});
 	}
 }
