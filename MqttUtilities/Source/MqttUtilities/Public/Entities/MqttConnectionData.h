@@ -16,4 +16,8 @@ struct MQTTUTILITIES_API FMqttConnectionData
     /** User password. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MQTT")
 	FString Password;
+
+	/** Secure connection via TLS */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MQTT")
+	bool bUseTLS = false;
 };
