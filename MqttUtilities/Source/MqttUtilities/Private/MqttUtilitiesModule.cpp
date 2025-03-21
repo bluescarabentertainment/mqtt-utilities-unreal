@@ -11,10 +11,8 @@ class FMqttUtilitiesModule : public IMqttUtilitiesModule
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
 
-private:
-
-	void* mDllHandleMosquitto;
-	void* mDllHandleMosquittopp;
+	void* mDllHandleMosquitto = nullptr;
+	void* mDllHandleMosquittopp = nullptr;
 };
 
 IMPLEMENT_MODULE(FMqttUtilitiesModule, MqttUtilities)
