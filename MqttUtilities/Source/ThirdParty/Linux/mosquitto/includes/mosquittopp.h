@@ -28,7 +28,7 @@ Contributors:
 #endif
 
 #include <cstdlib>
-#include "../../libmosquitto/includes/mosquitto.h"
+#include <mosquitto.h>
 #include <time.h>
 
 namespace mosqpp {

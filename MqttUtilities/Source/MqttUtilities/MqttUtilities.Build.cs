@@ -40,7 +40,7 @@ public class MqttUtilities : ModuleRules
 
 			PrivateIncludePaths.Add(Path.Combine(ModuleDirectory, "Private/Windows"));
 			PrivateIncludePaths.Add(Path.Combine(MosquittoLibPath, "includes"));
-
+			
 			PublicDelayLoadDLLs.Add("mosquitto.dll");
 			PublicDelayLoadDLLs.Add("mosquittopp.dll");
 
@@ -68,6 +68,24 @@ public class MqttUtilities : ModuleRules
 			RuntimeDependencies.Add("$(BinaryOutputDir)/mosquittopp.dylib", Path.Combine(MosquittoLibPath, "mosquittopp.dylib"));
 			RuntimeDependencies.Add("$(BinaryOutputDir)/libssl.dylib", Path.Combine(MosquittoLibPath, "libssl.dylib"));
 			RuntimeDependencies.Add("$(BinaryOutputDir)/libcrypto.dylib", Path.Combine(MosquittoLibPath, "libcrypto.dylib"));
+		}
+
+		// Additional routine for Linux
+		if (Target.Platform == UnrealTargetPlatform.Linux)
+		{
+			string MosquittoLibPath = Path.Combine(ModuleDirectory, "../ThirdParty/", Target.Platform.ToString(), "mosquitto");
+			
+			PrivateIncludePaths.Add(Path.Combine(ModuleDirectory, "Private/Linux"));
+			PrivateIncludePaths.Add(Path.Combine(MosquittoLibPath, "includes"));
+
+			PublicDelayLoadDLLs.Add(Path.Combine(MosquittoLibPath, "libmosquitto.so"));
+			PublicDelayLoadDLLs.Add(Path.Combine(MosquittoLibPath, "libmosquittopp.so"));
+
+			PublicAdditionalLibraries.Add(Path.Combine(MosquittoLibPath, "libmosquitto.so"));
+			PublicAdditionalLibraries.Add(Path.Combine(MosquittoLibPath, "libmosquittopp.so"));
+
+			RuntimeDependencies.Add("$(BinaryOutputDir)/libmosquitto.so", Path.Combine(MosquittoLibPath, "libmosquitto.so"));
+			RuntimeDependencies.Add("$(BinaryOutputDir)/libmosquittopp.so", Path.Combine(MosquittoLibPath, "libmosquittopp.so"));
 		}
 
 		// Additional routine for iOS
