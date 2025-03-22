@@ -82,8 +82,10 @@ public class MqttUtilities : ModuleRules
 			PublicAdditionalLibraries.Add(Path.Combine(MosquittoLibPath, "libmosquitto.so"));
 			PublicAdditionalLibraries.Add(Path.Combine(MosquittoLibPath, "libmosquittopp.so"));
 
-			RuntimeDependencies.Add("$(BinaryOutputDir)/libmosquitto.so", Path.Combine(MosquittoLibPath, "libmosquitto.so"));
-			RuntimeDependencies.Add("$(BinaryOutputDir)/libmosquittopp.so", Path.Combine(MosquittoLibPath, "libmosquittopp.so"));
+			RuntimeDependencies.Add("$(BinaryOutputDir)/libmosquitto.so.1", Path.Combine(MosquittoLibPath, "libmosquitto.so"));
+			RuntimeDependencies.Add("$(BinaryOutputDir)/libmosquittopp.so.1", Path.Combine(MosquittoLibPath, "libmosquittopp.so"));
+			RuntimeDependencies.Add("$(BinaryOutputDir)/libssl.so.3", Path.Combine(MosquittoLibPath, "libssl.so"));
+			RuntimeDependencies.Add("$(BinaryOutputDir)/libcrypto.so.3", Path.Combine(MosquittoLibPath, "libcrypto.so"));
 		}
 
 		// Additional routine for iOS
