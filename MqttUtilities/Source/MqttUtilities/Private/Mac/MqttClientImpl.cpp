@@ -18,7 +18,7 @@ void MqttClientImpl::on_connect(int rc)
 		return;
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("MQTT => Impl: Connected"));
+	UE_LOG(LogTemp, Log, TEXT("MQTT => Impl: Connected"));
 
 	Task->OnConnect();
 }
@@ -30,21 +30,21 @@ void MqttClientImpl::on_disconnect(int rc)
 		return;
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("MQTT => Impl: Disconnected"));
+	UE_LOG(LogTemp, Log, TEXT("MQTT => Impl: Disconnected"));
 
 	Task->OnDisconnect();
 }
 
 void MqttClientImpl::on_publish(int mid)
 {
-	UE_LOG(LogTemp, Warning, TEXT("MQTT => Impl: Message published"));
+	UE_LOG(LogTemp, Log, TEXT("MQTT => Impl: Mesage published"));
 
 	Task->OnPublished(mid);
 }
 
 void MqttClientImpl::on_message(const mosquitto_message* src)
 {
-	UE_LOG(LogTemp, Warning, TEXT("MQTT => Impl: Message received"));
+	UE_LOG(LogTemp, Log, TEXT("MQTT => Impl: Message received"));
 
 	FMqttMessage msg;
 
@@ -80,7 +80,7 @@ void MqttClientImpl::on_message(const mosquitto_message* src)
 
 void MqttClientImpl::on_subscribe(int mid, int qos_count, const int* granted_qos)
 {
-	UE_LOG(LogTemp, Warning, TEXT("MQTT => Impl: Subscribed"));
+	UE_LOG(LogTemp, Log, TEXT("MQTT => Impl: Subscribed"));
 
 	TArray<int> qos;
 
@@ -94,7 +94,7 @@ void MqttClientImpl::on_subscribe(int mid, int qos_count, const int* granted_qos
 
 void MqttClientImpl::on_unsubscribe(int mid)
 {
-	UE_LOG(LogTemp, Warning, TEXT("MQTT => Impl: Unsubscribed"));
+	UE_LOG(LogTemp, Log, TEXT("MQTT => Impl: Unsubscribed"));
 
 	Task->OnUnsubscribe(mid);
 }

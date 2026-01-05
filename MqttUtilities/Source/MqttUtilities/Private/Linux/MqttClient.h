@@ -30,13 +30,11 @@ public:
 
 	void Publish(FMqttMessage message) override;
 
-public:
-
 	void Init(FMqttClientConfig configData) override;
 
 private:
 
-	FMqttRunnable* Task;
-	FRunnableThread* Thread;
+	FMqttRunnable* Task = nullptr;
+	FRunnableThread* Thread = nullptr;
 	FMqttClientConfig ClientConfig;
 };
