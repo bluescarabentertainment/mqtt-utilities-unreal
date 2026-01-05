@@ -40,6 +40,6 @@ public:
 private:
 	UMqttUtilitiesSettings* MqttUtilitiesSettings;
 
-	void* mDllHandleMosquitto;
-	void* mDllHandleMosquittopp;
+	void* mDllHandleMosquitto = nullptr;
+	void* mDllHandleMosquittopp = nullptr;
 };
