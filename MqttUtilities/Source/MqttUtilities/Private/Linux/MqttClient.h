@@ -36,5 +36,5 @@ private:
 
 	FMqttRunnable* Task = nullptr;
 	FRunnableThread* Thread = nullptr;
-	FMqttClientConfig ClientConfig = nullptr;
+	FMqttClientConfig ClientConfig;
 };
