@@ -10,6 +10,15 @@
 
 #define LOCTEXT_NAMESPACE "MqttUtilities"
 
+class FMqttUtilitiesModule : public IMqttUtilitiesModule
+{
+	virtual void StartupModule() override;
+	virtual void ShutdownModule() override;
+
+	void* mDllHandleMosquitto = nullptr;
+	void* mDllHandleMosquittopp = nullptr;
+};
+
 IMPLEMENT_MODULE(FMqttUtilitiesModule, MqttUtilities)
 
 void FMqttUtilitiesModule::StartupModule()
