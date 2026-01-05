@@ -4,29 +4,19 @@
 
 #if PLATFORM_WINDOWS
 #include "Windows/MqttClient.h"
-#endif
-
-#if PLATFORM_MAC
+#elif PLATFORM_MAC
 #include "Mac/MqttClient.h"
-#endif
-
-#if PLATFORM_IOS
+#elif PLATFORM_IOS
 #include "IOS/MqttClient.h"
-#endif
-
-#if PLATFORM_ANDROID
+#elif PLATFORM_ANDROID
 #include "Android/MqttClient.h"
-#endif
-
-#if PLATFORM_LINUX
+#elif PLATFORM_LINUX
 #include "Linux/MqttClient.h"
 #endif
 
 TScriptInterface<IMqttClientInterface> UMqttUtilitiesBPL::CreateMqttClient(FMqttClientConfig config)
 {
-	UE_LOG(LogTemp, Warning, TEXT("MQTT => Creating MQTT client..."));
-
-#if PLATFORM_WINDOWS || PLATFORM_MAC || PLATFORM_IOS || PLATFORM_ANDROID || PLATFORM_LINUX
+	UE_LOG(LogTemp, Log, TEXT("MQTT => Creating MQTT client..."));
 
 	UMqttClient* MqttClient = NewObject<UMqttClient>();
 	MqttClient->Init(config);
@@ -34,8 +24,4 @@ TScriptInterface<IMqttClientInterface> UMqttUtilitiesBPL::CreateMqttClient(FMqtt
 	MqttClientInterface.SetObject(MqttClient);
 	MqttClientInterface.SetInterface(Cast<IMqttClientInterface>(MqttClient));
 	return MqttClientInterface;
-#else	
-	return nullptr;
-#endif
-
 }

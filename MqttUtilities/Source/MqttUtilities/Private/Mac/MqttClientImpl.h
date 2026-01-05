@@ -20,5 +20,5 @@ public:
 	void on_subscribe(int mid, int qos_count, const int* granted_qos) override;
 	void on_unsubscribe(int mid) override;
 
-	FMqttRunnable* Task;
+	FMqttRunnable* Task = nullptr;
 };
